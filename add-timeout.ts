@@ -8,7 +8,7 @@ import { TimeoutError } from "./error";
  * @param timeoutMessage the message for the `TimeoutError`. Defaults to `undefined`.
  * @returns a function that wraps `fn` with a timeout
  */
-export default function addTimeout<T extends (...args: any[]) => any>(
+export function addTimeout<T extends (...args: any[]) => any>(
     fn: T,
     timeout = 3000,
     timeoutMessage?: string

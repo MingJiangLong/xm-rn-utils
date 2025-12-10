@@ -1,5 +1,5 @@
 
-const ErrorCode = {
+export const ErrorCode = {
     TIMEOUT_ERROR: "TIMEOUT_ERROR",
     NOT_AUTHENTICATED_ERROR: "NOT_AUTHENTICATED_ERROR",
     FORM_FIELD_ERROR: "FORM_FIELD_ERROR",
