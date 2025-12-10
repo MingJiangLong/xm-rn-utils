@@ -116,7 +116,7 @@ export async function createPostFactory(
         data?: D,
         options?: {
             buildRequestDataFn?: () => Promise<Record<string, any>>
-            buildHeaderFn?: () => Promise<Record<string, string>>
+            buildHeaderFn?: () => Promise<Record<string, any>>
             responseInterceptor?: (response: any) => Promise<R>
         }
     ) {
