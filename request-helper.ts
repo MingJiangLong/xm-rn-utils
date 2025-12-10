@@ -97,7 +97,7 @@ interface I_CreatePostFactoryOptions {
 
 const buildEmptyObject = () => Promise.resolve({})
 
-async function createPostFactory(
+export async function createPostFactory(
     options: I_CreatePostFactoryOptions) {
     const {
         host,
