@@ -14,7 +14,7 @@ interface Options extends RequestInit {
  * @returns 
  */
 async function fetchEnhanced(
-    input: string | URL | globalThis.Request,
+    input: string | Request,
     options: Options,
 ) {
 
