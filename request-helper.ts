@@ -71,13 +71,13 @@ export class ApiInfo {
     }
 }
 
-export function createApis<T extends I_ApisDesc<Record<string, string>>>(apis: T) {
+export function createApis<T extends I_ApisDesc<Record<string, string>>>(apis: T, desc?: T) {
     return Object.keys(apis).reduce((
         total,
         pathKey
     ) => {
         const path = apis[pathKey]
-        const apiDesc = apis[pathKey];
+        const apiDesc = desc?.[pathKey] ?? apis[pathKey];
         return {
             ...total,
             [pathKey]: new ApiInfo(path, apiDesc)
