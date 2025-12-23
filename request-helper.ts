@@ -21,47 +21,6 @@ async function fetchEnhanced(
     const { timeout = 3000, ...init } = options
     return addTimeout(fetch, timeout)(input, init)
 }
-
-// 放在本地
-const DEV_APIS_DESC = {
-    "canUseVoiceVerify": "是否可以使用语音验证",
-    "fetchIsPhoneNumberFirstSend": "验证是否当天首次触发短信",
-    "fetchLocaleSource": "获取国际化翻译内容",
-    "fetchSMS": "获取短信验证码",
-    "fetchVoiceVerifyCode": "获取语音验证码",
-    "uploadRiskData": "客户端采集数据",
-    "fetchImageVerifySource": "获取图验",
-    "logout": "用户登出",
-    "login": "用户注册登陆",
-    "feedback": "用户反馈",
-    "fetchAppType": "审核规则",
-    "updateFirebaseToken": "维护FirebaseToken",
-    "faceRecognition": "活体人脸/银行卡验证",
-    "locationOptions": "获取省市区"
-} as const;
-
-
-const apis = [
-    "canUseVoiceVerify",
-    "fetchIsPhoneNumberFirstSend",
-    "fetchLocaleSource",
-    "fetchSMS",
-    "fetchVoiceVerifyCode",
-    "uploadRiskData",
-    "fetchImageVerifySource",
-    "logout",
-    "login",
-    "feedback",
-    "fetchAppType",
-    "updateFirebaseToken",
-    "faceRecognition",
-    "locationOptions"
-] as const
-
-type I_Apis = typeof apis
-
-type I_ApisDesc<T> = Partial<Record<I_Apis[number], string>> & T;
-
 export class ApiInfo {
     path: string
     desc: string
@@ -71,7 +30,7 @@ export class ApiInfo {
     }
 }
 
-export function createApis<T extends I_ApisDesc<Record<string, string>>>(apis: T, desc?: T) {
+export function createApis<T extends Record<string, string>>(apis: T, desc?: T) {
     return Object.keys(apis).reduce((
         total,
         pathKey

@@ -10,8 +10,11 @@
   "license": "ISC",
   "description": "",
   "peerDependencies": {
-    "react-native-contacts": "*",
-    "react-native-device-info": "*",
-    "crypto-js":"*"
+    "crypto-js": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "react": "^19.2.3",
+    "react-native": "^0.83.1"
   }
 }

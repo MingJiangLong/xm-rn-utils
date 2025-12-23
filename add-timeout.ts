@@ -1,31 +1,28 @@
 import { TimeoutError } from "./error";
 
-
-/**
- * Wraps a function with a timeout. If the function does not return within the specified `timeout` (in milliseconds), a `TimeoutError` is thrown.
- * @param fn the function to wrap
- * @param timeout the timeout in milliseconds. Defaults to 3000.
- * @param timeoutMessage the message for the `TimeoutError`. Defaults to `undefined`.
- * @returns a function that wraps `fn` with a timeout
- */
-export function addTimeout<T extends (...args: any[]) => any>(
-    fn: T,
+export function addTimeout<T extends (...args: any[]) => Promise<any>>(
+    input: T,
     timeout = 3000,
     timeoutMessage?: string
 ) {
-    let timeoutId: ReturnType<typeof setTimeout> | undefined = undefined;
-    return (...args: Parameters<T>) => {
-        const timeoutTimer = new Promise<ReturnType<T>>((_, reject) => {
+
+    return async (...args: Parameters<T>) => {
+        let timeoutId: ReturnType<typeof setTimeout> | undefined = undefined;
+        const timeoutPromise = new Promise((_, reject) => {
             timeoutId = setTimeout(() => reject(new TimeoutError(timeoutMessage)), timeout);
         });
+        const operationPromise = input(...args);
+        const racePromise = Promise.race([operationPromise, timeoutPromise]);
+
         try {
-            return Promise.race([fn(...args), timeoutTimer]) as ReturnType<T>;
-        } finally {
-            if (timeoutId != undefined) {
-                clearTimeout(timeoutId);
-                timeoutId = undefined
-            };
+            const result = await Promise.race([racePromise, operationPromise]);
+            clearTimeout(timeoutId);
+            return result as Awaited<ReturnType<T>>;
+        } catch (error) {
+            clearTimeout(timeoutId);
+            throw error;
         }
     }
 }
+
 

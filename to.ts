@@ -1,7 +1,4 @@
 
-type I_PromiseValue<T = any> = T extends Promise<infer U> ? U : never
-
-
 
 /**
  * 
@@ -14,29 +11,27 @@ type I_PromiseValue<T = any> = T extends Promise<infer U> ? U : never
  * }
  * @returns 
  */
-export function to<T extends (...args: any[]) => Promise<any>, E = Error>(fn: T) {
-    return async (...args: Parameters<T>) => {
-        let toData: any = null;
-        let toError: any = null
+export function to<T extends (...args: any[]) => Promise<any>, E = Error>(
+    fn: T
+) {
+    return async (...args: Parameters<T>): Promise<[E | null, Awaited<ReturnType<T>> | null]> => {
         try {
-            const promise = fn(...args);
-            toData = await promise;
+            const data: Awaited<ReturnType<T>> = await fn(...args);
+            return [null, data];
         } catch (error) {
-            toError = error
+            return [error as E, null]
         }
-        return [toError, toData] as [E | null, I_PromiseValue<ReturnType<T>>]
     }
 }
+
+/** 要注意有些函数返回了null */
 export function toSync<T extends (...args: any) => any, E = Error>(fn: T) {
-    let toData: any = null;
-    let toError: any = null
-    return (...args: Parameters<T>) => {
+    return (...args: Parameters<T>): [E | null, ReturnType<T> | null] => {
         try {
-            const temp = fn(...args);
-            toData = temp;
+            const data = fn(...args);
+            return [null, data]
         } catch (error) {
-            toError = error
+            return [error as E, null]
         }
-        return [toError, toData] as [E | null, ReturnType<T>]
     }
 }

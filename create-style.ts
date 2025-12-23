@@ -1,6 +1,7 @@
 import {
     ImageStyle, TextStyle, ViewStyle,
-    StyleSheet, RegisteredStyle, Dimensions
+    StyleSheet,  RegisteredStyle, Dimensions,
+    PixelRatio
 } from "react-native";
 
 export enum FixSize {
@@ -28,7 +29,7 @@ function resizeValue(
         if (resizedType == "v") {
             resizeFn = resizeVertical
         }
-        return roundFn(resizeFn(sizeNumber))
+        return PixelRatio.roundToNearestPixel(roundFn(resizeFn(sizeNumber)));
     }
 }
 

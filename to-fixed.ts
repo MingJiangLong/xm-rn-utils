@@ -11,9 +11,15 @@
  * @returns 
  */
 export function toFixed(value: unknown, fractionDigits = 2) {
-    const valueStr = `${value ?? ""}`;
-    let num = Number(valueStr);
-    if (isNaN(num)) return 0;
-    let temp = num.toFixed(fractionDigits);
-    return Number(temp);
+    const num = Number(value);
+    if (isNaN(num)) {
+        return 0;
+    }
+    const digits = Math.max(0, Math.floor(fractionDigits));
+    if (digits === 0) {
+        return Math.round(num);
+    }
+    const factor = Math.pow(10, digits);
+    const roundedValue = Math.round(num * factor);
+    return roundedValue / factor;
 }
