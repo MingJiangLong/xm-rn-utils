@@ -16,10 +16,14 @@ export function addTimeout<T extends (...args: any[]) => Promise<any>>(
 
         try {
             const result = await Promise.race([racePromise, operationPromise]);
-            clearTimeout(timeoutId);
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
             return result as Awaited<ReturnType<T>>;
         } catch (error) {
-            clearTimeout(timeoutId);
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
             throw error;
         }
     }
