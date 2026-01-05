@@ -8,4 +8,5 @@ export * from './create-style'
 export * from './create-route-names'
 export * from './request-helper'
 export * from './api-data-decode'
+export * from './location'
 

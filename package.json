@@ -10,11 +10,13 @@
   "license": "ISC",
   "description": "",
   "peerDependencies": {
-    "crypto-js": "*"
+    "crypto-js": "*",
+    "@react-native-community/geolocation":"*"
   },
   "devDependencies": {
     "@types/react": "^19.2.7",
     "react": "^19.2.3",
-    "react-native": "^0.83.1"
+    "react-native": "^0.83.1",
+     "@react-native-community/geolocation":"3.4.0"
   }
 }
