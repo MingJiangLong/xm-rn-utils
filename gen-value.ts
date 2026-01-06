@@ -36,3 +36,10 @@ export function valueInRange(range: [number, number], float = 0) {
     const value = Math.random() * (range[1] - range[0]) + range[0]
     return Number(value.toFixed(float))
 }
+
+
+
+export const Generator = {
+    sample,
+    valueInRange
+}

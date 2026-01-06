@@ -10,11 +10,22 @@
   "license": "ISC",
   "description": "",
   "peerDependencies": {
-    "crypto-js": "*"
+    "@react-native-firebase/analytics": "*",
+    "@react-native-firebase/app": "*",
+    "@react-native-firebase/messaging": "*",
+    "crypto-js": "*",
+    "react": "*",
+    "react-native": "*",
+    "react-native-image-picker": "*"
   },
   "devDependencies": {
+    "@react-native-firebase/analytics": "^23.7.0",
+    "@react-native-firebase/app": "^23.7.0",
+    "@react-native-firebase/messaging": "^23.7.0",
+    "@types/crypto-js": "^4.2.2",
     "@types/react": "^19.2.7",
     "react": "^19.2.3",
-    "react-native": "^0.83.1"
+    "react-native": "^0.83.1",
+    "react-native-image-picker": "^8.2.1"
   }
 }
