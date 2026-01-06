@@ -16,9 +16,11 @@
     "crypto-js": "*",
     "react": "*",
     "react-native": "*",
-    "react-native-image-picker": "*"
+    "react-native-image-picker": "*",
+    "@react-native-community/geolocation":"*"
   },
   "devDependencies": {
+    "@react-native-community/geolocation": "^3.4.0",
     "@react-native-firebase/analytics": "^23.7.0",
     "@react-native-firebase/app": "^23.7.0",
     "@react-native-firebase/messaging": "^23.7.0",
